@@ -69,6 +69,41 @@ void InsertInLinkedList(  int data, int position){
 	}
 }
 
+void DeleteNodeFromLinkedList (int position){
+	int k = 1;
+	struct ListNode *p,*q;
+	if( head == NULL )
+	{
+		printf("List Empty");
+		return;
+	}
+	p = head;
+	//from the beginning 
+	if(position == 1)
+	{
+		head = head->next;
+		p->data = NULL;
+		return;
+	}
+	else{
+		//traverse the list until the position from which we want tos delete 
+		while( (p!= NULL) && (k<position))
+		{
+			k++;
+			q = p;
+			p =p->next;
+		}
+		if( p == NULL )
+		{
+			printf("Position does not exist");
+			
+		}
+		else{
+			q->next = p->next;
+			p->data = NULL;
+		}
+	}
+}
 int main()
 {
 	int data = 2;
@@ -76,6 +111,8 @@ int main()
 	
 	InsertInLinkedList( 5,1);
 	print();
+	printf("\n %d", ListLength());
+	DeleteNodeFromLinkedList(1);
 	printf("\n %d", ListLength());
 	getch();
 	return(0);
