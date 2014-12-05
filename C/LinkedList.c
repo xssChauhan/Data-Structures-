@@ -5,7 +5,7 @@ struct ListNode{
 	struct ListNode *next;
 }*head;
 
-int ListLength( struct ListNode* head){
+int ListLength( ){
 	struct ListNode *current  = head;
 	int count = 0;
 	
@@ -13,6 +13,7 @@ int ListLength( struct ListNode* head){
 		count++;
 		current = current->next;
 	}
+	return count;
 }
 void print()
 {
@@ -37,7 +38,7 @@ void InsertInLinkedList(  int data, int position){
 	}
 	if(head == NULL)
 	{
-		printf("head  null");
+		
 		newNode->data = data;
 		newNode->next = NULL;
 		head = newNode;
@@ -58,7 +59,7 @@ void InsertInLinkedList(  int data, int position){
 		//traverse the list until the position where we want to insert
 		while((p != NULL) && (k<position))
 		{
-			printf("go");
+			
 			k++;
 			p = q;
 			p = p->next;
@@ -72,9 +73,10 @@ int main()
 {
 	int data = 2;
 	head = NULL;
-	printf("hello");
+	
 	InsertInLinkedList( 5,1);
 	print();
+	printf("\n %d", ListLength());
 	getch();
 	return(0);
 }
