@@ -104,16 +104,29 @@ void DeleteNodeFromLinkedList (int position){
 		}
 	}
 }
+
+void DeleteLinkedList()
+{
+	struct ListNode *auxiliaryNode, *iterator;
+	iterator = head;
+	while(iterator)
+	{
+		auxiliaryNode = iterator->next;
+		iterator->data = NULL;
+		iterator->next = NULL;
+		
+	}	
+	head = NULL;
+}
 int main()
 {
 	int data = 2;
 	head = NULL;
 	
 	InsertInLinkedList( 5,1);
+	DeleteLinkedList();
+	printf("\n %d", ListLength());
 	print();
-	printf("\n %d", ListLength());
-	DeleteNodeFromLinkedList(1);
-	printf("\n %d", ListLength());
 	getch();
 	return(0);
 }
