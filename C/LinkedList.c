@@ -120,13 +120,46 @@ void DeleteLinkedList()
 }
 int main()
 {
-	int data = 2;
+	int a,i,p;
 	head = NULL;
+	head->data = NULL;
 	
-	InsertInLinkedList( 5,1);
-	DeleteLinkedList();
-	printf("\n %d", ListLength());
-	print();
-	getch();
-	return(0);
+	do{
+		printf("Enter your choice: \n 1. Insert \n 2.Delete Node \n 3.Display \n 4. Count \n5. Delete List \n 6.Exit");
+		scanf( "%d", &a);
+		if( a < 1 || a > 5)
+		{
+			printf("Wrong choice entered");
+		}
+		else{
+			switch(a)
+			{
+				case 1:
+				printf("Enter the number you want to enter\n");
+				scanf("%d", &i);
+				printf("Enter the position at which you want to enter the data\n");
+				scanf("%d", &p);
+				InsertInLinkedList(i,p);
+				break;
+				case 2:
+				printf("Enter the position from which you want to delete \n");
+				scanf("%d", &p);
+				DeleteNodeFromLinkedList(p);
+				break;
+				case 3:
+				print();
+				break;
+				case 4:
+				printf("%d",ListLength());
+				break;
+				case 5:
+				DeleteLinkedList();
+				break;
+				case 6: 
+				return 0;
+				break;
+			}
+		}
+	}while(1);
+	return 0;
 }
