@@ -19,6 +19,7 @@ void print()
 {
 	struct ListNode *p;
 	p = head;
+	printf("The list: \n");
 
 	while(p != NULL)
 	{
@@ -27,46 +28,50 @@ void print()
 	}
 }
 
-void InsertInLinkedList(  int data, int position){
-	int k = 1;
-	struct ListNode *p, *q, *newNode;
+void InsertInLinkedList(  int data, int position ){
+	
+	int k =1;
+	struct ListNode *newNode, *p, *q;
 	newNode = (struct ListNode *)malloc(sizeof(struct ListNode));
 	if(!newNode)
 	{
 		printf("Memory Error");
-		return;
 	}
+	p = head;
+	newNode->data = data;
+	//insertion in case of empty list
 	if(head == NULL)
 	{
-		
-		newNode->data = data;
-		newNode->next = NULL;
 		head = newNode;
+		newNode->next = NULL;
 		return;
-		
 	}
-	newNode->data = data;
-	p = head;
-	
-	//inserting at the beginning
-	
 	if(position == 1)
 	{
-		newNode->next  = p;
-		head  = newNode;
+		newNode->next = head;
+		head = newNode;
+		return;
 	}
-	else{
-		//traverse the list until the position where we want to insert
-		while((p != NULL) && (k<position))
-		{
-			
-			k++;
-			p = q;
-			p = p->next;
-		}
+	while( (k<position) && (p->next != NULL))
+	{
+		k++;
+		q = p;
+		p = p->next;
+	}
+	if(k != position || k!= position - 1)
+	{
+		printf("Position does not exist\n");
+		return;
+	}
+	if(p->next){
+	
 		q->next = newNode;
 		newNode->next = p;
+		return;
 	}
+	p->next = newNode;
+	newNode->next = NULL;
+	return;
 }
 
 void DeleteNodeFromLinkedList (int position){
@@ -74,7 +79,7 @@ void DeleteNodeFromLinkedList (int position){
 	struct ListNode *p,*q;
 	if( head == NULL )
 	{
-		printf("List Empty");
+		printf("List Empty\n");
 		return;
 	}
 	p = head;
@@ -95,7 +100,7 @@ void DeleteNodeFromLinkedList (int position){
 		}
 		if( p == NULL )
 		{
-			printf("Position does not exist");
+			printf("Position does not exist\n");
 			
 		}
 		else{
@@ -121,17 +126,13 @@ void DeleteLinkedList()
 int main()
 {
 	int a,i,p;
-	head = NULL;
-	head->data = NULL;
 	
-	do{
-		printf("Enter your choice: \n 1. Insert \n 2.Delete Node \n 3.Display \n 4. Count \n5. Delete List \n 6.Exit");
-		scanf( "%d", &a);
-		if( a < 1 || a > 5)
-		{
-			printf("Wrong choice entered");
-		}
-		else{
+	head =  NULL;
+	while(1)
+	{
+		printf("Enter a choice \n 1. Insert \n 2. Delete Node \n 3. Print List \n 4. Print List Length \n 5. Delete List \n 6. Exit\n");
+		scanf("%d", &a);
+	
 			switch(a)
 			{
 				case 1:
@@ -155,11 +156,14 @@ int main()
 				case 5:
 				DeleteLinkedList();
 				break;
-				case 6: 
+				case 6:
+				return 0;
+				break;
+				default:
 				return 0;
 				break;
 			}
 		}
-	}while(1);
+		
 	return 0;
 }
