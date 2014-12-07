@@ -126,7 +126,6 @@ void DeleteLinkedList()
 int main()
 {
 	int a,i,p;
-	
 	head =  NULL;
 	while(1)
 	{
