@@ -26,6 +26,7 @@ void print()
 		printf("%d \n", p->data);
 		p = p->next;
 	}
+	return;
 }
 
 void InsertInLinkedList(  int data, int position ){
@@ -35,7 +36,7 @@ void InsertInLinkedList(  int data, int position ){
 	newNode = (struct ListNode *)malloc(sizeof(struct ListNode));
 	if(!newNode)
 	{
-		printf("Memory Error");
+		printf("Memory Error \n");
 	}
 	p = head;
 	newNode->data = data;
@@ -46,29 +47,28 @@ void InsertInLinkedList(  int data, int position ){
 		newNode->next = NULL;
 		return;
 	}
+	//insertion at the head
 	if(position == 1)
 	{
 		newNode->next = head;
 		head = newNode;
 		return;
 	}
+	//insertion at intermediate positions and the end
 	while( (k<position) && (p->next != NULL))
 	{
 		k++;
 		q = p;
 		p = p->next;
 	}
-	if(k != position || k!= position - 1)
-	{
-		printf("Position does not exist\n");
-		return;
-	}
+	
 	if(p->next){
 	
 		q->next = newNode;
 		newNode->next = p;
 		return;
 	}
+	//insertion at the end of the list
 	p->next = newNode;
 	newNode->next = NULL;
 	return;
@@ -105,7 +105,7 @@ void DeleteNodeFromLinkedList (int position){
 		}
 		else{
 			q->next = p->next;
-			p->data = NULL;
+			free(p);
 		}
 	}
 }
