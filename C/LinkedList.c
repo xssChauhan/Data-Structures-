@@ -122,7 +122,7 @@ int main()
 {
 	int a,i,p;
 	head = NULL;
-	head->data = NULL;
+	
 	
 	do{
 		printf("Enter your choice: \n 1. Insert \n 2.Delete Node \n 3.Display \n 4. Count \n5. Delete List \n 6.Exit");
