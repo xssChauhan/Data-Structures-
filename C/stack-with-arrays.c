@@ -81,3 +81,33 @@ void DeleteStack( struct DynArrayStack *S)
 		}
 	}
 }
+int main()
+{
+	int a;
+	struct DynArrayStack *s = CreateStack();
+	while(1)
+	{
+		printf("Enter your choice \n 1.Push \n 2.Pop \n 3. Delete \n 4. Exit \n");
+		switch(a)
+		{
+			case 1:
+				printf("Enter the data you want to enter \n");
+				scanf("%d", &a);
+				Push(s,a);
+				break;
+			case 2:
+				printf("The popped element is %d \n" , Pop(s));
+				break;
+			case 3:
+				DeleteStack(s);
+				break;
+			case 4:
+				return 0;
+				break;
+			default:
+				printf("Wrong choice\n");
+				break;
+		}
+	}
+	return 0;
+}
