@@ -9,7 +9,8 @@ struct DynArrayStack{
 
 struct DynArrayStack *CreateStack()//the function returns structure as the data type
 {
-	struct DynArrayStack *S = malloc(sizeof(struct DynArrayStack));
+	struct DynArrayStack *S;
+	S = (struct DynArrayStack *)malloc(sizeof(struct DynArrayStack));
 	if( !S)
 	return NULL;
 	
@@ -27,7 +28,7 @@ struct DynArrayStack *CreateStack()//the function returns structure as the data 
 
 int IsFullStack( struct DynArrayStack *S)
 {
-	return (( S->top == S->capacity-1)?true:false);
+	return ( S->top == S->capacity-1);
 }
 
 void DoubleStack( struct DynArrayStack *S)
@@ -46,9 +47,9 @@ void Push(struct DynArrayStack *S, int x)
 	S->array[++S->top] = x;
 }
 
-int isEmptyStack( struct DynArrayStack *s)
+int isEmptyStack( struct DynArrayStack *S)
 {
-	return ((S->top == -1)?true:false);
+	return (S->top == -1);
 }
 
 int Top( struct DynArrayStack *S)
@@ -66,7 +67,7 @@ int Pop(struct DynArrayStack *S)
 	{
 		return INT_MIN;
 	}
-	return S->array(S->top--);
+	return S->array[S->top--];
 }
 
 void DeleteStack( struct DynArrayStack *S)
@@ -76,7 +77,7 @@ void DeleteStack( struct DynArrayStack *S)
 		if(S->array)
 		{
 			free(S->array);
-			free->S;
+			free(S);
 		}
 	}
 }

@@ -117,8 +117,8 @@ void DeleteLinkedList()
 	while(iterator)
 	{
 		auxiliaryNode = iterator->next;
-		iterator->data = NULL;
-		iterator->next = NULL;
+		free(iterator);
+		iterator = auxiliaryNode;
 		
 	}	
 	head = NULL;
