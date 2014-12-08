@@ -10,7 +10,7 @@ struct Stack{
 struct Stack *Create()
 {
 	struct Stack *S;
-	S = (Stack *)malloc(sizeof(struct Stack));
+	S = (struct Stack *)malloc(sizeof(struct Stack));
 	if(!S)
 	{
 		printf("Memory not available \n");
@@ -94,8 +94,8 @@ int main(){
 	
 	while(1)
 	{
-		printf("Enter your choice \n 1. Push \n 2. Pop \n 3.Print \n4. Stack Length \n 5. Delete Stack \n 6. Exit \n");
-		scanf("%d\n", &a);	
+		printf("Enter your choice \n 1. Push \n 2. Pop \n 3.Print \n 4. Stack Length \n 5. Delete Stack \n 6. Exit \n");
+		scanf("%d", &a);	
 		switch(a)
 		{
 			case 1:
