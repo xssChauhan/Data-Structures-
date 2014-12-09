@@ -23,12 +23,12 @@ struct QueueArray *Create()
 	return p;
 }
 
-void isFullQueue( struct QueueArray *p)
+int isFullQueue( struct QueueArray *p)
 {
 	return ( (p->rear+1)%(p->capacity) == p->front);
 }
 
-void isEmptyQueue( struct QueueArray *p)
+int isEmptyQueue( struct QueueArray *p)
 {
 	return( p->front == -1);
 }
@@ -84,7 +84,7 @@ void ResizeQueue( struct QueueArray *p)
 			p->array[i+size] = p->array[i];
 			
 		}	
-		Q->rear = Q->rear+ size;
+		p->rear = p->rear+ size;
 	}
 	return;
 }
