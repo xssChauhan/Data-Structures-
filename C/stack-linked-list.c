@@ -91,6 +91,7 @@ void DeleteStack()
 
 int main(){
 	int a, i;
+	head =  NULL;
 	
 	while(1)
 	{
