@@ -118,40 +118,73 @@ void InOrderTraversal(struct Tree *p)
 {
 	struct Stack *stack =  CreateStack();
 	struct TreeNode *current = p->root;
-	int done = 0;
-	while(!done)
+	while(1)
 	{
 		while(current!= NULL)
 		{
 			Push( current , stack );
 			current = current->left;
 		}
-		while( !isEmptyStack(stack) )
-		{
-			current = Pop(stack);
-			printf("%d\n", current->data);
-			current = current->right;
-		}
 		if(isEmptyStack(stack))
-		{
-			done = 1;
-		}
+			break;
+		current = Pop(stack);
+		printf("%d,\n", current->data);
+		current = current->right;
 	}
 	return;
-
-	
 }
 
 //traverse the Binary Tree Post Order
-void PostOrderTraversal( struct Tree *p)
+void PreOrderTraversal( struct Tree *p)
 {
 	struct Stack *stack = CreateStack();
+	struct TreeNode *current = p->root;
+	while(1)
+	{
+		while(current!=NULL)
+		{
+			printf("%d \n", current->data);
+			Push(current, stack);
+			current = current->left;
+		}
+		if(isEmptyStack(stack))
+			break;
+		current = Pop(stack);
+		current = current->right;
+	}
+	return;
 }
 
 //traverse the Binary tree in PreOrder 
-void PreOrderTraversal(struct Tree *p)
+void PostOrderTraversal(struct Tree *p)
 {
 	struct Stack *stack = CreateStack();
+	struct TreeNode *current = p->root;
+	do
+	{
+		while(current != NULL)
+		{
+			if(current->right)
+			{
+				Push(current->right, stack);
+			}
+			Push(current, stack);
+			current = current->left;
+		}
+		current= Pop(stack);
+		if(current->right && stack->head->data == current->right)
+		{
+			Pop(stack);
+			Push(current,stack);
+			current = current->right;	
+		}
+		else
+		{
+			printf("%d \n", current->data);
+			current = NULL;
+		}
+	}while(!isEmptyStack);
+	return;
 }
 
 
