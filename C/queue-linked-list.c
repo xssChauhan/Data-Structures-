@@ -61,6 +61,12 @@ struct Node *CreateNode()
  		printf("The Queue is empty \n");
  		return 0;
  	}
+ 	if(p->front == p->rear)
+ 	{
+ 		temp = p->front;
+ 		p->front = p->rear = NULL;
+ 		free(temp);
+ 	}
  	temp = p->front;
  	data = temp->data;
  	p->front = p->front->next;
