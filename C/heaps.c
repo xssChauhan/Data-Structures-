@@ -1,15 +1,13 @@
 #include<stdio.h>
-#include<conio.h>
 #include<stdlib.h>
 
 struct Heap{
 	int *array;
 	int count;
 	int capacity;
-	int heap_type;
 };
 
-struct Heap *CreateHeap(int capacity, int heap_type)
+struct Heap *CreateHeap(int capacity)
 {
 	struct Heap *h = malloc(sizeof(struct Heap));
 	if(!h)
@@ -17,10 +15,9 @@ struct Heap *CreateHeap(int capacity, int heap_type)
 		printf("Memory Error");
 		return;
 	}
-	h->heap_type = heap_type;
 	h->count == 0;
 	h->capacity = capacity;
-	h->array = (int *)malloc(sizeof((int)*h->capacity));
+	h->array = (int *)malloc(sizeof(int)*h->capacity);
 
 	if(!h->array)
 	{
@@ -98,9 +95,9 @@ void PercolateDown( struct Heap *h, int i)
 	if( max != i )
 	{
 		//Swap the elements
-		temp  = array[i];
-		array[i] = array[max];
-		array[max] = temp;
+		temp  = h->array[i];
+		h->array[i] = h->array[max];
+		h->array[max] = temp;
 	}
 	PercolateDown(h, max);
 }
@@ -116,7 +113,7 @@ int DeleteMax( struct Heap *h)
 {
 	int data;
 	data = h->array[0];
-	h->array[0] = h->array[count];
+	h->array[0] = h->array[h->count];
 	h->count--;
 	PercolateDown(h,0);
 	return data;
@@ -164,4 +161,65 @@ void Insert(struct Heap *h, int data)
 	}
 	
 	return;
+}
+
+/*
+Deleting Array
+1. Free the array
+2. Free the heap
+*/
+void DeleteHeap(struct Heap *h)
+{
+	free(h->array);
+	free(h);
+	h = NULL;
+	return;
+}
+
+/*
+Building a Heap from an array or Heapifying the Array
+1. Resize the heap array if size exceeds
+2. Copy the array into the heap
+3. Percolate Down from the Parent of the last element, or the leaf
+*/
+void BuildHeap( struct Heap *h, int A[], int n)
+{
+	int i;
+	if(n>h->capacity)
+	{
+		h = ResizeHeap(h);
+	}	
+	for(i = 0; i< n; i++)
+	{
+		h->array[i] = A[i];
+	}
+	for(i= (n-1)/2; i>=0; i--)
+	{
+		PercolateDown(h, i);
+	}
+	return;
+}
+
+/*
+Heapsort: Input the built array
+2. Delete the top element
+3. Run until the array is empty
+*/
+void *HeapSort( struct Heap *h)
+{	
+	int i;
+	i = h->count;
+	while(i>=0)
+	{
+		printf("%d \n", DeleteMax(h));
+		i = h->count;
+	}
+}
+
+
+
+int main()
+{
+	printf("Hello World");
+	return 0;
 }
