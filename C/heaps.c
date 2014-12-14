@@ -159,5 +159,6 @@ void Insert(struct Heap *h, int data)
 	{
 		h->array[i] = h->array[ ( i - 1 )/2 ];
 	}
+	h->array[i] = data;
 	return;
 }
