@@ -148,17 +148,20 @@ inserting an element into the heap
 
 void Insert(struct Heap *h, int data)
 {
-	int i;
+	int i, temp;
 	if(h->count == h->capacity || h->count >= h->capacity)
 	{
 		h = ResizeHeap(h);
 	}
 	h->array[++h->count] = data;
-	i = h->count - 1;
-	while( i >= 0 && data > h->array[(i-1)/2])
+	i = h->count;
+	while( i >= 0 && h->array[i] > h->array[(i-1)/2])
 	{
-		h->array[i] = h->array[ ( i - 1 )/2 ];
+		temp = h->array[i];
+		h->array[(i-1)/2] = h->array[i];
+		h->array[i] = temp;
+		i = (i-1)/2;
 	}
-	h->array[i] = data;
+	
 	return;
 }
