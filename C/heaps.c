@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<conio.h>
+#include<stdlib.h>
 
 struct Heap{
 	int *array;
@@ -104,9 +105,59 @@ void PercolateDown( struct Heap *h, int i)
 	PercolateDown(h, max);
 }
 
-//Deleting Maximum element
+/*Deleting Maximum element
+1. Make the last element of the heap the first element
+2. Decrease the count of the heap by one
+3. Percolate down the new root element to the correct place
+4. return data
+*/
 
 int DeleteMax( struct Heap *h)
 {
-	
+	int data;
+	data = h->array[0];
+	h->array[0] = h->array[count];
+	h->count--;
+	PercolateDown(h,0);
+	return data;
+}
+
+/*
+Resizing The Heap using repeated doubling
+1. Double The capacity of the heap
+2. Reallocate the memory to the heap array
+3. return heap
+*/
+struct Heap *ResizeHeap( struct Heap *h)
+{
+	h->capacity = h->capacity*2;
+	h->array = realloc(h->array, h->capacity);
+	if(!h->array)
+	{
+		printf("Cannot extend array size\n");
+	}
+	return h;
+}
+
+/*
+inserting an element into the heap
+1. Check if the heap is out of memory. If so, Resize the array.
+2. Inserting the element the element at the end of the list
+3. Iterate with the condition that element is being added at a position that is greater than zero and the data is greater than is parent element
+*/
+
+void Insert(struct Heap *h, int data)
+{
+	int i;
+	if(h->count == h->capacity || h->count >= h->capacity)
+	{
+		h = ResizeHeap(h);
+	}
+	h->array[++h->count] = data;
+	i = h->count - 1;
+	while( i >= 0 && data > h->array[(i-1)/2])
+	{
+		h->array[i] = h->array[ ( i - 1 )/2 ];
+	}
+	return;
 }
