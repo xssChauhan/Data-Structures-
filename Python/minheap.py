@@ -57,8 +57,12 @@ class minheap:
     #Inserting element into the heap
     def insert(self, data):
         self.heap.append(data)
-        i = self.heaplength()
-        self.heapify(i)
+        i = self.heaplength() - 1
+        parent = self.parent[i]
+        while parent ! = [] and self.heap[i] < self.heap[parent]:
+            self.heap[i], self.heap[parent] = self.heap[parent], self.heap[i]
+            i = parent
+            parent = self.parent(i)
 
     #Building the heap
     def buildheap(self , nums):
@@ -67,13 +71,14 @@ class minheap:
 
     #Deleting the topmost element of the heap, which in this case is the minimum element of the heap
     def deletemin(self):
-        if( self.heaplength() == 0 )
+        """Implements the function of popping from the heap"""
+        if self.heaplength() == 0 :
             return -1
         data = self.heap[0]
         self.heap = self.heap[1:]
-        self.heapify(self.heaplength())
+        self.heapify(0)
         return data
-    
+
 
 
 
