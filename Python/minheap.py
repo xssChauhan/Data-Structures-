@@ -1,5 +1,5 @@
 import math
-class minheap:
+class minheap(object):
     def __init__(self, nums = 0):
         self.heap = []
         if nums:
@@ -37,7 +37,7 @@ class minheap:
             return -1
         return right
 
-    #Heapify the heap
+    #Transform into the heap
     def heapify(self, i):
 
         l = self.leftchild(i)
@@ -59,7 +59,7 @@ class minheap:
         self.heap.append(data)
         i = self.heaplength() - 1
         parent = self.parent[i]
-        while parent ! = [] and self.heap[i] < self.heap[parent]:
+        while parent != [] and self.heap[i] < self.heap[parent]:
             self.heap[i], self.heap[parent] = self.heap[parent], self.heap[i]
             i = parent
             parent = self.parent(i)
@@ -68,16 +68,15 @@ class minheap:
     def buildheap(self , nums):
         for i in xrange(nums):
             self.heap[i] = input()
-
-    #Deleting the topmost element of the heap, which in this case is the minimum element of the heap
-    def deletemin(self):
-        """Implements the function of popping from the heap"""
-        if self.heaplength() == 0 :
-            return -1
-        data = self.heap[0]
-        self.heap = self.heap[1:]
         self.heapify(0)
-        return data
+
+    #Pop from the heap
+    def heappop(self):
+        """Get the root element of the heap"""
+        if( self.heaplength()):
+            self.heap[0] , self.heap[ -1 ] = self.heap[-1] ,self.heap[0]
+            pop = self.heap.pop()
+        return pop
 
 
 
