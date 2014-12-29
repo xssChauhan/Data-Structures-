@@ -29,5 +29,12 @@ function Queue(){
 			return undefined;
 		}
 		var item = queue[rear];
+
+		if( ++rear * 2 > queue.length)
+		{
+			queue = queue.slice(rear);
+			rear = 0;
+		}
+		return item;
 	}
 }
