@@ -37,4 +37,15 @@ function Queue(){
 		}
 		return item;
 	}
+		//gives a peak at the first element of the queue
+	this.peek = function()
+	{
+		if( queue.length == 0)
+		{
+			return undefined;
+		}
+		return queue[queue.length - 1];
+
+	}
+		
 }
